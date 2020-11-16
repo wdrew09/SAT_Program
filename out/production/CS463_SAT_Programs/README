@@ -1,0 +1,33 @@
+To Run:
+Within the CNFInteroperator class, the main func has 6 functions within it. To run a single function, just comment out the rest of them. Main is on line 70.
+
+Graphs:
+There are two graphs within the src folder. One graph has all the runs from the cnf files from CNF_Formulas. The DPLL runs were all successful and correct. For WalkSAT,
+I ran each formula 10 times with a max_flips of 2500. The WalkSAT runs were all successful and correct. For GSAT I ran it the same way as WalkSAT, 10 runs of 2500
+flips each. These were also all successful. The times for WalkSAT and GSAT are the average out of the 10 runs. For the second graph, I ran a random 60 files from the
+folder of hard cnf. Again, the DPLL runs were all successful. I ran the same 10 runs with 2500 maxFlips for WalkSAT and GSAT. This time, however, they were not 100% accurate.
+This is due to the maxFlips needing to be higher for files of this size. The majority still came back with the correct assignment and if you were to increase the maxFlips to
+10,000 or more, they should all come back correct.
+
+DPLL Description:
+DPLL works by first making sure the clauses are not empty. It also checks to make sure the flip sides of the same literal are not contained in the same clause.
+The program will also run unit propagation which finds any clauses with a single unassigned literal and makes sure that literal always satisies that clause.
+The program also finds and assigns all pure literals. These are literals that are only ever shown for one value throughout the clauses. The program will also
+try and find any consistent literals. If the program is able to find a set of literals that satisfies each clause, it will return true.
+
+WalkSAT Description:
+WalkSAT starts by assigning random values to each literal, ex. -1, 2, 3, -4, 5... After this, I run the clauses through a function that determines if each clause
+is satisfied by the literal assignments. After this, with a probability p, which I have set to .5, the program will either go to a function that will randomly flip
+a literal from a unsatisfied clause or it will go to a function that will flip a literal from an unsatisfied clause that will also limit new constraints. The program
+will go through this cycle until either all clauses are satisfied by the literal assignments or it reaches the max_flips which I have set to 2500.
+
+GSAT Description:
+The GSAT solution is very similar to WalkSAT. GSAT starts by assigning random values to each literal, ex. -1, 2, 3, -4, 5... After this, I run the clauses through a
+function that determines if each clause is satisfied by the literal assignments. Once this is done, a function is called which will determine which literal can be flipped
+that causes the greatest decrease in the number of unsatisfied clauses. This number will sometimes even be negative. The program will continue calling this function until
+either all clauses or satisfied or it has reached the max_flips, which I set to 2500.
+
+Learning Outcome:
+I learned a couple things for this assignment. The first was obviously working with different algorithms and seeing the process of how each really works. The second
+was learning how to increase the performance of my programs. Doing thousands and thousands of loops can make it difficult to get anything done in a reasonable amount of
+time. So learning how to optimize my programs was definitely important for this assignment.
